@@ -1,0 +1,88 @@
+$def with (data)
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>New York City Events</title>
+<style>
+body,div {
+    margin: 0;
+    padding: 0;
+    border: none;
+    color: #333;
+    cursor: default;
+    list-style: none;
+}
+body {
+    font: 0.85em/1.25em helvetica,serif;
+}
+#container {
+    margin: 0 auto;
+    width: 600px;
+}
+.event {
+    border-bottom: 1px solid #ddd;
+    margin: 0 0 10px 0;
+    padding: 10px 0;
+}
+.event_name {
+    font-weight: bold;
+    width: 80%;
+    margin: 0 0 5px 0;
+}
+.event_info {
+    overflow: auto;
+    font-size: 90%;
+}
+.location_info {
+    float: left;
+    width: 160px;
+    font-size: 90%;
+}
+.address {
+    margin: 5px 0 0 0;
+}
+.description {
+    float: right;
+    width: 400px;
+}
+.critic_name {
+    display: block;
+}
+</style>
+</head>
+
+<body>
+
+<div id="container">
+    <h1>New York City Events</h1>
+    <div id="content">
+        $for d in data['results']:
+            <div class="event">
+                <div class="event_name">$d['event_name']</div>
+                <div class="event_info">
+                    <div class="location_info">
+                        <div class="venue_name">$d['venue_name']</div>
+                        <div class="datetime_description">$d['date_time_description']</div>
+                        <div class="address">
+                            $d['street_address']<br />
+                            $if 'cross_street' in d:
+                                $d['cross_street']<br />
+                            $if 'city' in d and 'state' in d and 'postal_code' in d:
+                                $d['city'], $d['state'], $d['postal_code']
+                            $if 'geocode_latitude' in d:
+                                <br/><a href="http://maps.google.com/maps?q=$url_encode('%s,%s (%s)' % (d['geocode_latitude'], d['geocode_longitude'], d['venue_name']))&amp;z=17">View Google Map</a>
+                        </div>
+                    </div>
+                    <div class="description">
+                    $entity_decode(d['web_description'])
+                    $if 'critic_name' in d:
+                         <span class="critic_name">&mdash; $d['critic_name']</span>
+                    </div>
+                </div>
+            </div>
+    </div>
+</div>
+
+</body>
+</html>
