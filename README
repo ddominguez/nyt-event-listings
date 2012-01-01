@@ -1,0 +1,12 @@
+NYTimes Event Listings API Demo
+-----------------------------------
+Using: Python 2.7.2 and web.py 0.36
+
+
+About The Demo
+-----------------------------------
+This app will display up to 50 events in New York City for the current day.
+Events approaching their end date will appear first.
+
+
+TODO: add google maps api
