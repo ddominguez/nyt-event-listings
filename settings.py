@@ -1,6 +1,7 @@
 from datetime import date
 
 DEBUG = False
+HOST = ''
 
 api_key = ''
 api_version = 'v2'

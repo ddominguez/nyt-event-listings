@@ -3,7 +3,7 @@ import settings
 from flask import Flask, render_template
 
 app = Flask(__name__)
-app.config['DEBUG'] = settings.DEBUG
+app.debug = settings.DEBUG
 
 
 @app.route("/")
@@ -17,4 +17,4 @@ def index():
 
 
 if __name__ == "__main__":
-    app.run()
+    app.run(host=settings.HOST)
