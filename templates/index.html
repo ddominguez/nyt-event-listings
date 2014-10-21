@@ -9,6 +9,20 @@
 </head>
 
 <body>
-    hello world.
+    <div class="container">
+        <div class="page-header">
+            <h1>New York City Events</h1>
+        </div>
+        {% for event in events %}
+        <div class="event">
+            <div class="title"><strong>{{event.event_name}}</strong> at {{event.venue_name}}</div>
+            <span class="small">{{event.date_time_description}}</span>
+            <p>
+                {{event.web_description|striptags}}
+                <span class="small">&mdash;{{event.critic_name}}</span>
+            </p>
+        </div>
+        {% endfor %}
+    </div>
 </body>
 </html>
