@@ -12,9 +12,6 @@ function initialize() {
 
     var i;
     for (i=0; i<events_length; i++) {
-        // setTimeout(function(){
-        //     addMarker();
-        // }, i*200);
         addMarker();
     }
 }
@@ -22,8 +19,7 @@ function initialize() {
 function addMarker() {
     var marker = new google.maps.Marker({
         position: {lat: parseFloat(events[iterator]['geocode_latitude']), lng: parseFloat(events[iterator]['geocode_longitude'])},
-        map: map,
-        // animation: google.maps.Animation.DROP
+        map: map
     });
     var contentHtml;
 
