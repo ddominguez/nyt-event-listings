@@ -9,7 +9,7 @@ html, body, #google-map {
 }
 
 #event-info {
-    background-color: rgba(255, 255, 255, 0.85);
+    background-color: rgba(255, 255, 255, 0.90);
     display: none;
     padding: 10px;
     position: absolute;
@@ -18,4 +18,10 @@ html, body, #google-map {
     height: 100%;
     width: 375px;
     z-index: 100;
+}
+
+@media (max-width: 600px) {
+  #event-info {
+    width: 100%;
+  }
 }
