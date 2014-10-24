@@ -4,7 +4,18 @@ html, body, #google-map {
     padding: 0;
 }
 
-
 #google-map {
     height: 100%;
+}
+
+#event-info {
+    background-color: rgba(255, 255, 255, 0.85);
+    display: none;
+    padding: 10px;
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: 100%;
+    width: 375px;
+    z-index: 100;
 }
