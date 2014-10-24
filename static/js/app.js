@@ -1,12 +1,17 @@
 var events_length = events.length;
 var iterator = 0;
 var map;
-var infowindow;
+var infowindow = new google.maps.InfoWindow({
+    maxWidth: 300
+});
 
 function initialize() {
     var mapOptions = {
         center: {lat: parseFloat(events[0]['geocode_latitude']), lng: parseFloat(events[0]['geocode_longitude'])},
         zoom: 12,
+        panControl:false,
+        mapTypeControl:false,
+        streetViewControl:false,
     };
     map = new google.maps.Map(document.getElementById('google-map'), mapOptions);
 
@@ -21,29 +26,39 @@ function addMarker() {
         position: {lat: parseFloat(events[iterator]['geocode_latitude']), lng: parseFloat(events[iterator]['geocode_longitude'])},
         map: map
     });
-    var contentHtml;
+    var markerHtml, contentHtml;
 
     // open marker info when hovering over marker
-    google.maps.event.addListener(marker, 'mouseover', (function(marker, iterator) {
+    google.maps.event.addListener(marker, 'click', (function(marker, iterator) {
         return function() {
-            contentHtml = '<strong>'+events[iterator]['event_name']+'</strong>';
-
-            infowindow = new google.maps.InfoWindow({
-                content: contentHtml,
-                maxWidth: 300
-            });
+            markerHtml = '<strong>'+events[iterator]['event_name']+'</strong>'
+                            +'<br/> at '+events[iterator]['venue_name'];
+            infowindow.setContent(markerHtml);
             infowindow.open(map, marker);
         }
     })(marker, iterator));
 
-    // close marker info on mouse out
-    google.maps.event.addListener(marker, 'mouseout', (function(marker, iterator) {
-        return function() {
-            infowindow.close();
-        }
-    })(marker, iterator));
-
     // load event info in new modal
+    // google.maps.event.addListener(marker, 'click', (function(marker, iterator) {
+    //     return function() {
+    //         contentHtml = '<span id="close-button" class="close">&times;</span>'
+    //                         +'<h4>'+events[iterator]['event_name']+'</h1>'
+    //                         +events[iterator]['web_description'];
+    //
+    //         $('#event-info').fadeOut(function() {
+    //             $(this).html(contentHtml).fadeIn();
+    //         });
+    //     }
+    // })(marker, iterator));
+
     iterator++;
 }
+
 google.maps.event.addDomListener(window, 'load', initialize);
+
+$(function() {
+    // close event info
+    $('body').on('click', '#close-button', function() {
+        $(this).parent().fadeOut();
+    });
+});
