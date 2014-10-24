@@ -61,14 +61,16 @@ $(function() {
     $('body').on('click', '#more-info', function() {
         var key = $(this).data('key');
         contentHtml = '<span id="close-button" class="close">&times;</span>'
-                        +'<h4>'+events[key]['event_name']+' <small> at the '+events[key]['venue_name']+'</small></h4>'
-                        +'<p class="addr"><strong>Address</strong> '+events[key]['street_address']+' '+events[key]['city']+', '+events[key]['state']+' '+events[key]['postal_code']+'</p>'
-                        +'<p class="phone"><strong>Phone Number</strong> '+events[key]['telephone']+'</p>'
+                        +'<h4>'+events[key]['event_name']+'</h4>'
+                        +'<p class="addr"><strong>Location</strong> '+events[key]['venue_name']
+                        +'<br/>'+events[key]['street_address']
+                        +'<br/>'+events[key]['city']+', '+events[key]['state']+' '+events[key]['postal_code']
+                        +'<br/>'+events[key]['telephone']+'</p>'
                         +'<p class="description">'+stripTags(events[key]['web_description'])
                         +'<span class="small">&mdash;'+events[key]['critic_name']+'</span></p>'
                         +'<p>'+events[key]['date_time_description']+'</p>';
         if (events[key]['times_pick']) {
-            contentHtml += '<p><span class="glyphicon glyphicon-ok"></span> New York Times Critic Pick</p>'
+            contentHtml += '<p><span class="glyphicon glyphicon-ok"></span> New York Times Critics\' Pick</p>'
         }
 
         $('#event-info').fadeOut(function() {
