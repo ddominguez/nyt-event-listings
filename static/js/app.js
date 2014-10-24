@@ -2,7 +2,7 @@ var events_length = events.length;
 var iterator = 0;
 var map;
 var infowindow = new google.maps.InfoWindow({
-    maxWidth: 300
+    maxWidth: 250
 });
 
 function initialize() {
@@ -32,33 +32,34 @@ function addMarker() {
     google.maps.event.addListener(marker, 'click', (function(marker, iterator) {
         return function() {
             markerHtml = '<strong>'+events[iterator]['event_name']+'</strong>'
-                            +'<br/> at '+events[iterator]['venue_name'];
+                            +'<br/> '+events[iterator]['venue_name']
+                            +'<br/><a id="more-info" href="#" data-key="'+iterator+'">More Info</a>';
             infowindow.setContent(markerHtml);
             infowindow.open(map, marker);
         }
     })(marker, iterator));
-
-    // load event info in new modal
-    // google.maps.event.addListener(marker, 'click', (function(marker, iterator) {
-    //     return function() {
-    //         contentHtml = '<span id="close-button" class="close">&times;</span>'
-    //                         +'<h4>'+events[iterator]['event_name']+'</h1>'
-    //                         +events[iterator]['web_description'];
-    //
-    //         $('#event-info').fadeOut(function() {
-    //             $(this).html(contentHtml).fadeIn();
-    //         });
-    //     }
-    // })(marker, iterator));
 
     iterator++;
 }
 
 google.maps.event.addDomListener(window, 'load', initialize);
 
+// jquery methods
 $(function() {
     // close event info
     $('body').on('click', '#close-button', function() {
         $(this).parent().fadeOut();
+    });
+
+    // open event info
+    $('body').on('click', '#more-info', function() {
+        var key = $(this).data('key');
+        contentHtml = '<span id="close-button" class="close">&times;</span>'
+                        +'<h4>'+events[key]['event_name']+'</h1>'
+                        +events[key]['web_description'];
+
+        $('#event-info').fadeOut(function() {
+            $(this).html(contentHtml).fadeIn();
+        });
     });
 });
