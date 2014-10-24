@@ -15,7 +15,7 @@ today = date.today().isoformat()
 api_params = {
     'api-key': api_key,
     'limit': 50,
-    'filters': 'category:(-Movies),long_running_show:false',
+    'filters': 'category:(-Movies),last_chance:true',
     'sort': 'last_chance desc',
     'date_range': '%s:%s' % (today, today)
 }
