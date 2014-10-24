@@ -1,3 +1,4 @@
+import json
 import requests
 import settings
 from flask import Flask, render_template
@@ -12,7 +13,7 @@ def index():
     data = r.json()
     return render_template(
         'index.html',
-        events=data['results']
+        events=json.dumps(data['results'])
     )
 
 
