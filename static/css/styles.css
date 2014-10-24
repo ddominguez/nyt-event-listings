@@ -20,6 +20,19 @@ html, body, #google-map {
     z-index: 100;
 }
 
+#event-info h4 small {
+    display: block;
+}
+
+#event-info .description span.small {
+    display: block;
+}
+
+#event-info p.addr strong,
+#event-info p.phone strong {
+    display: block;
+}
+
 @media (max-width: 600px) {
   #event-info {
     width: 100%;
