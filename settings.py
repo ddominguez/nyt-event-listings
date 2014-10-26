@@ -1,15 +1,11 @@
+import os
 from datetime import date
 
-DEBUG = False
+DEBUG = os.environ.get('FlASK_DEBUG', False)  # add environment variable
 HOST = ''
 
-api_key = ''
+api_key = os.environ.get('NYT_API_KEY', '')  # add environment variable
 api_version = 'v2'
-
-try:
-    from local_settings import *
-except ImportError:
-    pass
 
 today = date.today().isoformat()
 api_params = {
