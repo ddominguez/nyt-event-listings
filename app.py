@@ -18,4 +18,6 @@ def index():
 
 
 if __name__ == "__main__":
+    if settings.DEBUG:
+        settings.HOST = '0.0.0.0'
     app.run(host=settings.HOST)
