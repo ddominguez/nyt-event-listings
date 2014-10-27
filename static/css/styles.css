@@ -8,7 +8,7 @@ html, body, #google-map {
     height: 100%;
 }
 
-#event-info {
+.info-container {
     background-color: rgba(255, 255, 255, 0.90);
     display: none;
     padding: 10px;
@@ -33,8 +33,13 @@ html, body, #google-map {
     display: block;
 }
 
+.info-container span.close,
+.info-container h4 {
+    margin-top:50px;
+}
+
 @media (max-width: 600px) {
-  #event-info {
+  .info-container {
     width: 100%;
   }
 }
