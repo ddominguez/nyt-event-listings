@@ -62,6 +62,7 @@ $(function() {
 
     // open event info
     $('body').on('click', '#more-info', function() {
+        event.preventDefault();
         var key = $(this).data('key');
         contentHtml = '<span id="close-button" class="close">&times;</span>'
                         +'<h4>'+events[key]['event_name']+'</h4>'
@@ -88,6 +89,7 @@ $(function() {
 
     // open about info
     $('#nav-about').click(function() {
+        event.preventDefault();
         // if event info is open...close it!
         if ($('#event-info').css('display') === 'block') {
             $('#event-info').fadeOut();
