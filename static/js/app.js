@@ -96,10 +96,10 @@ $(function() {
         }
 
         // hide collapased navbar, then show about info
-        $('.navbar-collapse').collapse('hide');
-        $('.navbar-collapse').on('hidden.bs.collapse', function () {
-            $('#about-info').fadeIn();
-        })
+        if ($('.navbar-collapse').hasClass('in')) {
+            $('button.navbar-toggle').click();
+        }
+        $('#about-info').fadeIn();
     });
 });
 
