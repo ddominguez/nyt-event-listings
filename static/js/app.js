@@ -12,6 +12,9 @@ function initialize() {
         panControl:false,
         mapTypeControl:false,
         streetViewControl:false,
+        zoomControlOptions: {
+            position: google.maps.ControlPosition.LEFT_CENTER
+        }
     };
     map = new google.maps.Map(document.getElementById('google-map'), mapOptions);
 
@@ -73,9 +76,28 @@ $(function() {
             contentHtml += '<p><span class="glyphicon glyphicon-ok"></span> New York Times Critics\' Pick</p>'
         }
 
+        // if about info is open...close it!
+        if ($('#about-info').css('display') === 'block') {
+            $('#about-info').fadeOut();
+        }
+
         $('#event-info').fadeOut(function() {
             $(this).html(contentHtml).fadeIn();
         });
+    });
+
+    // open about info
+    $('#nav-about').click(function() {
+        // if event info is open...close it!
+        if ($('#event-info').css('display') === 'block') {
+            $('#event-info').fadeOut();
+        }
+
+        // hide collapased navbar, then show about info
+        $('.navbar-collapse').collapse('hide');
+        $('.navbar-collapse').on('hidden.bs.collapse', function () {
+            $('#about-info').fadeIn();
+        })
     });
 });
 
