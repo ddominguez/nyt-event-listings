@@ -1,52 +1,23 @@
-#!/usr/bin/env python
 import json
-import web
-import config
-import urllib2
-import HTMLParser
-import re
+import requests
+import settings
+from flask import Flask, render_template
 
-urls = (
-    '/', 'index'
-)
-
-event_categories = {
-    'Art': 'Art',
-    'Classical': 'Classical & Opera',
-    'Dance': 'Dance',
-    'Jazz': 'Jazz',
-    'Pop': 'Rock & Pop',
-    'Theater': 'Theater',
-    'spareTimes': 'Spare Times',
-    'forChildren': 'For Children'
-}
-
-def get_data():
-    print config.event_listing_uri
-    return json.load(urllib2.urlopen(config.event_listing_uri))
-
-def entity_decode(s):
-    h = HTMLParser.HTMLParser()
-    return h.unescape(replace_text(s))
-
-def replace_text(s):
-    x = {'<p>': '','</p>': ''}
-    for k,v in x.iteritems():
-        s = re.sub(k,v,s)
-    return s
-
-def url_encode(s):
-    return urllib2.quote(s.encode('utf-8'))
+app = Flask(__name__)
+app.debug = settings.DEBUG
 
 
-class index:
-    def GET(self):
-        data = get_data()
-        return render.index(data)
+@app.route("/")
+def index():
+    r = requests.get(settings.api_uri, params=settings.api_params)
+    data = r.json()
+    return render_template(
+        'index.html',
+        events=json.dumps(data['results'])
+    )
 
 
-render = web.template.render('templates', globals={'entity_decode': entity_decode, 'url_encode': url_encode})
-app = web.application(urls, globals())
-
-if __name__ == '__main__':
-    app.run()
+if __name__ == "__main__":
+    if settings.DEBUG:
+        settings.HOST = '0.0.0.0'
+    app.run(host=settings.HOST)

@@ -1,0 +1,45 @@
+html, body, #google-map {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+#google-map {
+    height: 100%;
+}
+
+.info-container {
+    background-color: rgba(255, 255, 255, 0.90);
+    display: none;
+    padding: 10px;
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: 100%;
+    width: 375px;
+    z-index: 100;
+}
+
+#event-info h4 small {
+    display: block;
+}
+
+#event-info .description span.small {
+    display: block;
+}
+
+#event-info p.addr strong,
+#event-info p.phone strong {
+    display: block;
+}
+
+.info-container span.close,
+.info-container h4 {
+    margin-top:50px;
+}
+
+@media (max-width: 600px) {
+  .info-container {
+    width: 100%;
+  }
+}
