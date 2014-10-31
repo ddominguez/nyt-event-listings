@@ -6,8 +6,9 @@ var infowindow = new google.maps.InfoWindow({
 });
 
 function initialize() {
+    var manhattan = {lat: 40.7590615, lng: -73.969231};
     var mapOptions = {
-        center: {lat: parseFloat(events[0]['geocode_latitude']), lng: parseFloat(events[0]['geocode_longitude'])},
+        center: manhattan,
         zoom: 12,
         panControl:false,
         mapTypeControl:false,
@@ -45,6 +46,8 @@ function addMarker() {
                             +'<br/><a id="more-info" href="#" data-key="'+iterator+'">More Info</a>';
             infowindow.setContent(markerHtml);
             infowindow.open(map, marker);
+            map.setZoom(15);
+            map.setCenter(marker.getPosition());
         }
     })(marker, iterator));
 
