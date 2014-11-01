@@ -1,4 +1,5 @@
 import json
+import os
 import requests
 import settings
 from flask import Flask, render_template
@@ -20,4 +21,5 @@ def index():
 if __name__ == "__main__":
     if settings.DEBUG:
         settings.HOST = '0.0.0.0'
-    app.run(host=settings.HOST)
+    port = int(os.environ.get('PORT', 5000))
+    app.run(host=settings.HOST, port=port)
