@@ -1,13 +1,14 @@
 var events_length = events.length;
 var iterator = 0;
 var map;
+var manhattan = {lat: 40.7590615, lng: -73.969231};
 var infowindow = new google.maps.InfoWindow({
     maxWidth: 250
 });
 
 function initialize() {
     var mapOptions = {
-        center: {lat: parseFloat(events[0]['geocode_latitude']), lng: parseFloat(events[0]['geocode_longitude'])},
+        center: manhattan,
         zoom: 12,
         panControl:false,
         mapTypeControl:false,
@@ -45,6 +46,8 @@ function addMarker() {
                             +'<br/><a id="more-info" href="#" data-key="'+iterator+'">More Info</a>';
             infowindow.setContent(markerHtml);
             infowindow.open(map, marker);
+            map.setCenter(marker.getPosition());
+            map.setZoom(15);
         }
     })(marker, iterator));
 
@@ -100,6 +103,13 @@ $(function() {
             $('button.navbar-toggle').click();
         }
         $('#about-info').fadeIn();
+    });
+
+    // reset map
+    $('#nav-text').click(function() {
+        event.preventDefault();
+        map.setCenter(manhattan);
+        map.setZoom(12);
     });
 });
 
